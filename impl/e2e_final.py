@@ -13,7 +13,7 @@ try:
 except: pass
 
 sys.path.insert(0, '/home/ponder/.openclaw/workspace/astock-implementation/impl')
-STOCK_CODE = '000858'
+STOCK_CODE = '603288'
 
 print("="*70)
 print("A股深度分析系统 - 完整端到端验证")
@@ -22,18 +22,18 @@ print("="*70)
 # Stage 1: PDF - 尝试2024年报，回退到2023年报
 print("\n[1/5] PDF下载...")
 t0 = time.time()
-pdf_path = "/home/ponder/.openclaw/workspace/astock-implementation/cache/module6/000858_2024_annual_report.pdf"
+pdf_path = "/home/ponder/.openclaw/workspace/astock-implementation/cache/module6/603288_2024_annual_report.pdf"
 if not os.path.exists(pdf_path):
     try:
         from module6_mda.downloader import PDFDownloader
         dl = PDFDownloader()
         # 搜索2023-2025的年报
-        reports = dl.get_annual_report_list('000858', 'gssz0000858', 2023, 2025)
+        reports = dl.get_annual_report_list('603288', 'gssh0603288', 2023, 2025)
         for r in reports:
             t = r.get('announcementTitle', '')
             if ('年度报告' in t and '摘要' not in t and '更正' not in t
                     and '取消' not in t and '英文' not in t):
-                pdf_path = dl.download_with_fallback('000858', 2023, 'gssz0000858', r)
+                pdf_path = dl.download_with_fallback('603288', 2023, 'gssh0603288', r)
                 print(f"  📄 使用2023年报: {t}")
                 break
     except Exception as e:

@@ -154,7 +154,7 @@ class FinancialFetcher:
         KNOWN = {
             '股票代码': 'code', 'code': 'code',
             '公告日期': 'pubDate', 'pub_date': 'pubDate',
-            '报告日期': 'statDate', 'stat_date': 'statDate',
+            '日期': 'statDate', '报告日期': 'statDate', 'stat_date': 'statDate',
             '营业总收入': 'revenue', 'total_revenue': 'revenue',
             '净利润': 'net_profit', 'net_profit': 'net_profit',
             '资产总计': 'total_assets', 'total_assets': 'total_assets',
@@ -170,9 +170,14 @@ class FinancialFetcher:
             '应付账款周转天数': 'payable_days',
         }
         col_map = {}
+        # 按长度降序排列，确保更具体的列名优先匹配
+        sorted_known = sorted(KNOWN.items(), key=lambda x: len(x[0]), reverse=True)
         for col in df.columns:
             upper = str(col).upper()
-            for known, target in KNOWN.items():
+            for known, target in sorted_known:
+                # '日期' 只匹配报告日期，不匹配公告日期（公告日期单独处理）
+                if col == '日期' and known == '公告日期':
+                    continue
                 if known.upper() in upper or upper in known.upper():
                     col_map[col] = target
                     break
@@ -258,11 +263,24 @@ class FinancialFetcher:
         df_ak = df_ak.reset_index(drop=True) if not df_ak.empty else df_ak
         df_h5 = df_h5.reset_index(drop=True) if not df_h5.empty else df_h5
 
-        # akshare: 列名已经是标准名；HDF5: 列名带prefix
-        # 统一处理：akshare直接用，HDF5用profit_*, balance_*等
-        all_rows = pd.concat([df_ak, df_h5], sort=False)
+        # 优先使用akshare数据（更及时），HDF5仅用于填补akshare缺失的年份
+        if df_ak.empty and df_h5.empty:
+            return pd.DataFrame()
+        if df_ak.empty:
+            return df_h5
+        if df_h5.empty:
+            return df_ak
+        # 去除HDF5中与akshare重复的列（保留akshare版本，akshare更及时）
+        ak_cols = set(df_ak.columns)
+        h5_deduped = df_h5[[c for c in df_h5.columns if c not in ak_cols]]
+        # 用statDate作为key，只从HDF5补充akshare没有的年份
+        ak_years = set(df_ak['statDate'].astype(str)) if 'statDate' in df_ak.columns else set()
+        h5_extra = h5_deduped[~h5_deduped['statDate'].astype(str).isin(ak_years)] if 'statDate' in h5_deduped.columns else pd.DataFrame()
+        all_rows = pd.concat([df_ak, h5_extra], sort=False)
         if 'statDate' in all_rows.columns:
             all_rows = all_rows.drop_duplicates(subset=['statDate'], keep='first')
+        # 去除concat产生的重复列（如果有）
+        all_rows = all_rows.loc[:, ~all_rows.columns.duplicated()]
         return all_rows
 
     def _compute_metrics(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -277,6 +295,8 @@ class FinancialFetcher:
         if df.empty:
             return df
         df = df.copy()
+        # [FIX G2-3] 去除重复列名（akshare多表concat可能产生）
+        df = df.loc[:, ~df.columns.duplicated()]
 
         net_p = self._get_col(df, ['net_profit', 'profit_net_profit'])
         rev = self._get_col(df, ['revenue', 'profit_revenue'])
