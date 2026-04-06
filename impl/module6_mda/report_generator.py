@@ -131,7 +131,7 @@ def header_footer(c, doc):
     c.setFillColor(C_ACCENT)
     c.drawString(2*cm, H - 1.2*cm, '海天味业(603288) 深度分析报告')
     c.setFillColor(HexColor('#6C757D'))
-    c.drawRightString(W - 2*cm, H - 1.2*cm, '2026-04-06')
+    c.drawRightString(W - 2*cm, H - 1.2*cm, '市值: 2439亿 | 2026-04-03')
     c.setStrokeColor(C_BORDER)
     c.setLineWidth(0.5)
     c.line(2*cm, H - 1.4*cm, W - 2*cm, H - 1.4*cm)
@@ -219,7 +219,7 @@ def build(output_path):
         ('核心产品', '酱油(149亿)、蚝油(49亿)、调味酱(29亿)'),
         ('产能规模', '产销量超480万吨/年，行业第一'),
         ('研发投入', '约3%营收，近十年累计超65亿元'),
-        ('最新市值', '约1850亿元（A股，PE约26x）'),
+        ('最新市值', '约2439.6亿元（A股，PE约34.7x，股价41.69元，2026-04-03）'),
     ]))
     story.append(sp(10))
     story.extend(subsection('1.2 股权结构'))
@@ -432,8 +432,8 @@ def build(output_path):
         ('核心逻辑','调味品行稳致远，海天为绝对龙头。2025年基本面确认复苏，净利率持续改善。'),
         ('成长看点','1) 产品结构升级；2) 渠道下沉空间；3) 国际化增量'),
         ('盈利预测','预计2026年营收~310亿(+7%)，净利润~75亿(+7%)'),
-        ('估值参考','当前市值~1850亿，对应2025年PE约26x，历史中枢'),
-        ('股息率','约1.2%，特别分红额外贡献'),
+        ('估值参考','当前市值~2439亿，股价41.69元，对应2025年PE约34.7x（历史中枢约30x，当前偏高）'),
+        ('股息率','约0.74%（DPS0.31/股价41.69元），特别分红额外贡献'),
     ]))
     story.append(sp(8))
 
@@ -453,7 +453,7 @@ def build(output_path):
     kS = S('kS', fontSize=8, textColor=C_TEXT, fontName=_CN)
     kv = [
         [Paragraph('<b>评级</b>', sBody), Paragraph('维持"持有"', rec_S)],
-        [Paragraph('<b>目标价</b>', sBody), Paragraph('当前估值合理，关注Q1旺季数据', kS)],
+        [Paragraph('<b>目标价</b>', sBody), Paragraph('PE 34.7x高于历史中枢，估值偏贵。PE 30x对应目标价36.1元（-13%空间）。关注Q1旺季数据', kS)],
         [Paragraph('<b>核心跟踪</b>', sBody),
          Paragraph('①员工持股落地 ②Q1/Q2 2026旺季数据 ③黄豆价格 ④净利率改善持续性', kS)],
     ]
