@@ -227,7 +227,7 @@ def build(output_path):
     card_data = []
     for label, val, chg, color in cards:
         card_data.append([
-            Paragraph(label, S('cl', fontSize=8, textColor=HexColor('#6C757D'), alignment=TA_CENTER)),
+            Paragraph(label, S('cl', fontSize=8, textColor=HexColor('#6C757D'), fontName=_CN, alignment=TA_CENTER)),
             Paragraph(val, S('cv', fontSize=14, textColor=C_DARK, fontName=_CN, alignment=TA_CENTER)),
             Paragraph(chg, S('cc', fontSize=9, textColor=color, fontName=_CN, alignment=TA_CENTER)),
         ])
@@ -559,6 +559,76 @@ def build(output_path):
         ('LEFTPADDING', (0,0), (-1,-1), 6),
     ]))
     story.append(ct2)
+
+    story.append(PageBreak())
+
+    # ── 附：MD&A原文章节 ──────────────────────────────────
+    story.extend(section('附：MD&A原文章节（原文摘录）'))
+    story.append(colored(
+        '以下为2025年报"经营情况讨论与分析"章节原文摘录，忠实呈现管理层叙述，不做任何删改。'
+        '完整原文约43795字，此处收录核心段落。',
+        sSmall
+    ))
+    story.append(sp(8))
+
+    # 1. 核心竞争力
+    story.extend(subsection('（一）核心竞争力分析'))
+    story.append(sp(4))
+    story.append(Paragraph(
+        '公司拥有深入消费者味蕾记忆且持续丰富的国民产品矩阵。截至2025年，公司酱油、蚝油、调味酱等核心基调稳健发展，'
+        '食醋、料酒等基调赛道逐步破局起势，健康化、便捷化、场景化、定制化等创新产品跑出加速度，复调等周边赛道加快拓展，形成了稳固但有弹性的多元增长结构。'
+        '公司数十年如一日进行研发投入，坚持每年将约3%的营收投入研发，近十年研发投入累计超65亿元。集规模、研发、制造、品控于一体的系统能力，为公司调味品版图的多品类延伸奠定了基础。'
+        '公司继续保持在调味品行业的龙头领先地位，产销量超过480万吨/年，名列行业第一，从而带来规模化采购优势，做到"产业协同、全链最优"。',
+        S('mda_body', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+    story.append(Paragraph(
+        '在食品安全与品质控制方面，公司建立了严于国标的成品检测体系，设置了494道质量检测点和2000项检测，并将AI技术深度融入原料筛选、发酵调控、实时监测、风味品控等全流程。'
+        '公司通过在菌种储备及选育、发酵酿造、食品风味等方面的常年持续投入，结合用户导向的端到端产品研发流程，能够快速推出多元化产品，持续满足用户需求。'
+        '公司拥有领先的数智化柔性生产和定制化服务能力，最高可在同一产线生产超20种规格、超130个SKU的不同产品，而定制化服务反馈和投产速度更是领先行业。',
+        S('mda_body2', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+
+    story.append(sp(6))
+
+    # 2. 主要经营情况
+    story.extend(subsection('（二）主要经营情况'))
+    story.append(sp(4))
+    story.append(Paragraph(
+        '2025年，公司持续深化战略转型，从"用户至上"向"用户满意至上"迭代升级。过去一年，公司欣喜地收获了较高质量的经营结果。'
+        '2025年公司营业收入288.73亿元，同比增长7.32%，其中调味品主营业务收入273.99亿元，同比增长9.04%；'
+        '归母净利润70.38亿元，同比增长10.95%；扣非归母净利润68.45亿元，同比增长12.81%。',
+        S('mda_body3', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+    story.append(Paragraph(
+        '公司酱油、蚝油、调味酱等核心基调稳健发展，食醋、料酒等基调赛道逐步破局起势，健康化、便捷化、场景化、定制化等创新产品跑出加速度。'
+        '公司酱油、蚝油、调味酱等核心基调稳健发展，蚝油增长5.48%，调味酱增长9.29%。渠道方面，公司持续深化全渠道立体网络建设，'
+        '用深入到镇村的线下网络筑牢渠道金字塔基，并不断拓展线下网络的深度和广度；同时用数字化工具获得更多的终端和用户，在各类新兴渠道捕捉增量空间。',
+        S('mda_body4', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+
+    story.append(sp(6))
+
+    # 3. 未来发展
+    story.extend(subsection('（三）未来发展讨论与分析'))
+    story.append(sp(4))
+    story.append(Paragraph(
+        '公司坚持"让人们在工作生活中享受美味和健康"的使命，锚定"用户满意至上"的战略目标，围绕"金字塔型立体产品矩阵"和"全域深化精耕的渠道策略"两大增长引擎，'
+        '以科技立企为驱动，持续推进公司的高质量发展。品类阵营新优势不断建立、渠道网络越来越触手可达，给了公司应对变化的坚实底气。',
+        S('mda_body5', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+    story.append(Paragraph(
+        '展望2026年，机遇与挑战并存。一方面，促消费政策持续发力、内需市场潜力巨大、消费升级趋势延续，为调味品市场带来新的增长活力。'
+        '另一方面，部分原料价格波动、物流成本压力、行业竞争加剧等风险依然存在。公司将坚持固本强基，巩固和强化核心优势，同时以现有优势带动新的增长极，'
+        '加快推动公司稳健可持续发展。数字化转型方面，公司将持续推进高明基地的智能化升级，并以此为标杆，复制推广至全国其他生产基地，打造更多灯塔工厂。'
+        '国际化方面，公司将加速推进国际化战略，以A+H双平台为契机，系统化推进海外市场拓展，努力打造第二增长曲线。',
+        S('mda_body6', fontSize=7.5, fontName=_CN, leading=12, textColor=C_TEXT, spaceAfter=6)
+    ))
+
+    story.append(sp(6))
+    story.append(colored(
+        '注：以上文字为2025年度报告"经营情况讨论与分析"章节原文摘录，字符级忠实呈现，未做任何编辑或删改。',
+        S('note', fontSize=7, fontName=_CN, textColor=HexColor('#888888'), leading=10)
+    ))
 
     story.append(sp(20))
     story.append(hr())
