@@ -43,8 +43,10 @@ elif os.path.exists(_noto_path):
 if _cn_font_path:
     try:
         pdfmetrics.registerFont(TTFont(_CN_NAME, _cn_font_path))
+        # Register bold variant too
+        pdfmetrics.registerFont(TTFont(_CN_NAME + '-Bold', _cn_font_path))
         _CN = _CN_NAME
-        print(f'Registered Chinese font: {_cn_font_path}')
+        print(f'Registered Chinese fonts (regular + bold): {_cn_font_path}')
     except Exception as e:
         print(f'Font registration error: {e}')
         _CN = 'Helvetica'
@@ -174,10 +176,10 @@ HAITIAN = {
 def header_footer(canvas_obj, doc):
     canvas_obj.saveState()
     # 页眉
-    canvas_obj.setFont('Helvetica-Bold', 8)
+    canvas_obj.setFont(_CN, 8)
     canvas_obj.setFillColor(C_ACCENT)
     canvas_obj.drawString(2*cm, H - 1.2*cm, '海天味业(603288) 深度分析报告')
-    canvas_obj.setFont('Helvetica', 8)
+    canvas_obj.setFont(_CN, 8)
     canvas_obj.setFillColor(HexColor('#6C757D'))
     canvas_obj.drawRightString(W - 2*cm, H - 1.2*cm, '2026-04-06')
     # 分隔线
@@ -185,7 +187,7 @@ def header_footer(canvas_obj, doc):
     canvas_obj.setLineWidth(0.5)
     canvas_obj.line(2*cm, H - 1.4*cm, W - 2*cm, H - 1.4*cm)
     # 页脚
-    canvas_obj.setFont('Helvetica', 7)
+    canvas_obj.setFont(_CN, 7)
     canvas_obj.setFillColor(HexColor('#ADB5BD'))
     canvas_obj.drawString(2*cm, 1*cm, '仅供投资参考，不构成投资建议')
     canvas_obj.drawRightString(W - 2*cm, 1*cm, f'第 {doc.page} 页')
@@ -336,24 +338,22 @@ def build(output_path):
     story.append(colored('单位: 亿元', sSmall))
     story.append(sp(4))
 
+    prod_style_hdr = S('psH', fontSize=9, textColor=white, fontName=_CN_NAME+'-Bold', alignment=TA_CENTER)
+    prod_style_cn = S('psCN', fontSize=9, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_CENTER)
+    prod_style_l = S('psL', fontSize=9, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_LEFT)
+    prod_style_r = S('psR', fontSize=9, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_RIGHT)
     prod_data = [
-        ['产品', '收入(亿)', '占比', 'YoY', '毛利率', '趋势'],
-        ['酱油', '149.34', '51.7%', '+8.55%', '~42%', '核心稳健'],
-        ['蚝油', '48.68', '16.9%', '+5.48%', '~38%', '稳定增长'],
-        ['调味酱', '29.17', '10.1%', '+9.29%', '~36%', '增速最快'],
-        ['其他调味品', '~61.5', '21.3%', '-', '-', '醋/料酒/复调'],
-        ['调味品主业', '273.99', '95.0%', '+9.04%', '-', '核心稳固'],
-        ['其他业务', '14.74', '5.0%', '-', '-', '非主业'],
-        ['合计', '288.73', '100%', '+7.32%', '39.3%', '史上最佳'],
+        [Paragraph(h, prod_style_hdr) for h in ['产品','收入(亿)','占比','YoY','毛利率','趋势']],
+        [Paragraph('酱油', prod_style_l), Paragraph('149.34', prod_style_r), Paragraph('51.7%', prod_style_cn), Paragraph('+8.55%', prod_style_r), Paragraph('~42%', prod_style_cn), Paragraph('核心稳健', prod_style_l)],
+        [Paragraph('蚝油', prod_style_l), Paragraph('48.68', prod_style_r), Paragraph('16.9%', prod_style_cn), Paragraph('+5.48%', prod_style_r), Paragraph('~38%', prod_style_cn), Paragraph('稳定增长', prod_style_l)],
+        [Paragraph('调味酱', prod_style_l), Paragraph('29.17', prod_style_r), Paragraph('10.1%', prod_style_cn), Paragraph('+9.29%', prod_style_r), Paragraph('~36%', prod_style_cn), Paragraph('增速最快', prod_style_l)],
+        [Paragraph('其他调味品', prod_style_l), Paragraph('~61.5', prod_style_r), Paragraph('21.3%', prod_style_cn), Paragraph('-', prod_style_cn), Paragraph('-', prod_style_cn), Paragraph('醋/料酒/复调', prod_style_l)],
+        [Paragraph('调味品主业', prod_style_l), Paragraph('273.99', prod_style_r), Paragraph('95.0%', prod_style_cn), Paragraph('+9.04%', prod_style_r), Paragraph('-', prod_style_cn), Paragraph('核心稳固', prod_style_l)],
+        [Paragraph('其他业务', prod_style_l), Paragraph('14.74', prod_style_r), Paragraph('5.0%', prod_style_cn), Paragraph('-', prod_style_cn), Paragraph('-', prod_style_cn), Paragraph('非主业', prod_style_l)],
+        [Paragraph('合计', prod_style_l), Paragraph('288.73', prod_style_r), Paragraph('100%', prod_style_cn), Paragraph('+7.32%', prod_style_r), Paragraph('39.3%', prod_style_cn), Paragraph('史上最佳', prod_style_l)],
     ]
     t = Table(prod_data, colWidths=[3*cm, 2.5*cm, 2*cm, 2*cm, 2*cm, 3*cm])
     t.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), C_ACCENT),
-        ('TEXTCOLOR', (0,0), (-1,0), white),
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,0), (-1,-1), 8),
-        ('ALIGN', (1,0), (-1,-1), 'CENTER'),
-        ('ALIGN', (0,0), (0,-1), 'LEFT'),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [white, C_LIGHT_BG]),
         ('GRID', (0,0), (-1,-1), 0.3, C_BORDER),
@@ -448,14 +448,15 @@ def build(output_path):
         ['2025-08-29', '【半年报】', '2025年半年度报告，H1营收152.32亿(+7.0%)'],
         ['2025-04-29', '【一季报】', '2025年第一季度报告，Q1营收83.17亿(+7.2%)'],
     ]
+    ann_hdr_s = S('annH', fontSize=9, textColor=white, fontName=_CN_NAME+'-Bold', alignment=TA_CENTER)
+    ann_body_s = S('annB', fontSize=8, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_LEFT)
     ann_t = Table(
-        [[Paragraph(c, S(f'ac{i}', fontSize=8, fontName=_CN if i==0 else 'Helvetica'))
+        [[Paragraph(c, ann_hdr_s if i == 0 else ann_body_s)
           for i, c in enumerate(row)] for row in ann_rows],
         colWidths=[2.5*cm, 3*cm, 10*cm]
     )
     ann_t.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), C_ACCENT),
-        ('TEXTCOLOR', (0,0), (-1,0), white),
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('ALIGN', (0,0), (1,-1), 'CENTER'),
         ('TOPPADDING', (0,0), (-1,-1), 4),
@@ -492,29 +493,25 @@ def build(output_path):
     story.append(sp(6))
 
     # 评分卡
+    sc_hdr = S('scH', fontSize=9, textColor=white, fontName=_CN_NAME+'-Bold')
+    sc_l = S('scL', fontSize=8, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_LEFT)
+    sc_c = S('scC', fontSize=8, textColor=C_TEXT, fontName=_CN_NAME, alignment=TA_CENTER)
     score_data = [
-        [Paragraph('<b>维度</b>', sBody),
-         Paragraph('<b>状态</b>', sBody),
-         Paragraph('<b>评分</b>', sBody),
-         Paragraph('<b>备注</b>', sBody)],
-        ['营收增长', '✅ 正面', '★★★★☆', '+7.3%，增速回升，2021年来最快'],
-        ['净利润', '✅ 正面', '★★★★★', '70.38亿创历史新高，+11%'],
-        ['净利率趋势', '✅ 正面', '★★★★☆', '24.4%连续2年提升'],
-        ['ROE趋势', '⚠️ 负面', '★★☆☆☆', '三连降，31.5%→19.6%'],
-        ['经营现金流', '✅ 正面', '★★★★★', 'CFO 77.5亿 >> 净利润 70.4亿'],
-        ['股东回报', '✅ 正面', '★★★★☆', '常规+特别分红，积极'],
-        ['产品竞争力', '✅ 正面', '★★★★★', '酱油/蚝油/调味酱三足鼎立'],
-        ['渠道覆盖', '✅ 正面', '★★★★☆', '镇村网络+数字化'],
-        ['员工持股', '⚠️ 中性', '★★★☆☆', '新草案需跟踪稀释'],
-        ['Q3增速放缓', '⚠️ 警示', '★★☆☆☆', '环比-7.5%需跟踪'],
-        ['国际化', '✅ 正面', '★★★☆☆', 'H股上市，但收入占比仍低'],
+        [Paragraph('维度', sc_hdr), Paragraph('状态', sc_hdr), Paragraph('评分', sc_hdr), Paragraph('备注', sc_hdr)],
+        [Paragraph('营收增长', sc_l), Paragraph('正面', sc_c), Paragraph('4/5', sc_c), Paragraph('+7.3%，增速回升', sc_l)],
+        [Paragraph('净利润', sc_l), Paragraph('正面', sc_c), Paragraph('5/5', sc_c), Paragraph('70.38亿创历史新高', sc_l)],
+        [Paragraph('净利率趋势', sc_l), Paragraph('正面', sc_c), Paragraph('4/5', sc_c), Paragraph('24.4%连续2年提升', sc_l)],
+        [Paragraph('ROE趋势', sc_l), Paragraph('负面', S('scRed', fontSize=8, textColor=C_RED, fontName=_CN_NAME, alignment=TA_CENTER)), Paragraph('2/5', sc_c), Paragraph('三连降31.5%-19.6%', sc_l)],
+        [Paragraph('经营现金流', sc_l), Paragraph('正面', sc_c), Paragraph('5/5', sc_c), Paragraph('CFO>净利润', sc_l)],
+        [Paragraph('股东回报', sc_l), Paragraph('正面', sc_c), Paragraph('4/5', sc_c), Paragraph('常规+特别分红', sc_l)],
+        [Paragraph('产品竞争力', sc_l), Paragraph('正面', sc_c), Paragraph('5/5', sc_c), Paragraph('酱油/蚝油/调味酱', sc_l)],
+        [Paragraph('员工持股', sc_l), Paragraph('中性', sc_c), Paragraph('3/5', sc_c), Paragraph('新草案需跟踪稀释', sc_l)],
+        [Paragraph('Q3增速放缓', sc_l), Paragraph('警示', S('scAmb', fontSize=8, textColor=C_AMBER, fontName=_CN_NAME, alignment=TA_CENTER)), Paragraph('2/5', sc_c), Paragraph('环比-7.5%需跟踪', sc_l)],
+        [Paragraph('国际化', sc_l), Paragraph('正面', sc_c), Paragraph('3/5', sc_c), Paragraph('H股上市，占比仍低', sc_l)],
     ]
     sc = Table(score_data, colWidths=[3*cm, 2.5*cm, 2*cm, 8*cm])
     sc.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), C_ACCENT),
-        ('TEXTCOLOR', (0,0), (-1,0), white),
-        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0,0), (-1,-1), 8),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [white, C_LIGHT_BG]),
         ('GRID', (0,0), (-1,-1), 0.3, C_BORDER),
