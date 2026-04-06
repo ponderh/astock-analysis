@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# API keys and credentials (DO NOT COMMIT)
+# Use environment variables instead:
+#   export MINIMAX_API_KEY=your_key
+#   export DEEPSEEK_API_KEY=your_key
+env_keys.txt
+*.env
+.env
+.env.local
+
+# Local cache and data
+cache/
+*.db
+*.db-journal
+*.log
+
+# Output files
+output/
+outputs/
+*.png
+*.jpg
+*.pdf
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Misc
+*.tmp
+*.bak

@@ -1,0 +1,90 @@
+{
+  "stock_code": "002014",
+  "stock_name": "永新股份",
+  "report_date": "2026-04-04",
+  "current_price": null,
+  "industry_confidence": {
+    "stock_code": "002014",
+    "primary_industry": "医药生物",
+    "confidence_score": 1.0,
+    "business_mix": {
+      "医药生物": 1.0
+    },
+    "sw3_industry": "",
+    "sw2_industry": "",
+    "routing_method": "single",
+    "is_low_confidence": false,
+    "effective_weight_multiplier": 1.0,
+    "is_cross_industry": false,
+    "note": "single, 置信度=1.00"
+  },
+  "pb_result": {
+    "percentile_full": null,
+    "percentile_recent": null,
+    "regime_discontinuity_warning": false,
+    "threshold_p20": null,
+    "threshold_p80": null,
+    "confidence": "low",
+    "data_years": 0,
+    "n_stocks_used": 0,
+    "note": "无历史数据"
+  },
+  "pe_result": {
+    "percentile_full": null,
+    "percentile_recent": null,
+    "regime_discontinuity_warning": false,
+    "threshold_p20": null,
+    "threshold_p80": null,
+    "confidence": "low",
+    "data_years": 0,
+    "n_stocks_used": 0,
+    "note": "无历史数据"
+  },
+  "dcf_result": {
+    "intrinsic_pessimistic": null,
+    "intrinsic_central": null,
+    "intrinsic_optimistic": null,
+    "confidence_width_pct": null,
+    "dcf_over_width_threshold": false,
+    "dcf_zero_width_error": true,
+    "confidence": "low",
+    "current_price": null,
+    "wacc": null,
+    "perpetual_growth_rate": null,
+    "note": "数据不足，无法计算DCF（EPS或ROE缺失）"
+  },
+  "graham_result": {
+    "graham_number": null,
+    "is_safety_test": true,
+    "current_price": null,
+    "safety_margin_pct": null,
+    "safety_passed": false,
+    "verdict": "数据不足",
+    "eps_ttm": null,
+    "bps": null,
+    "formula_version": "original_22.5",
+    "included_in_overall": false,
+    "note": "格雷厄姆数仅用于安全边际测试，is_safety_test=True，综合信号默认排除"
+  },
+  "bank_pb_result": null,
+  "composite_signal": {
+    "overall_verdict": "数据不足",
+    "overall_score": 0.0,
+    "pe_pb_score": 50.0,
+    "dcf_score": 10.0,
+    "bank_pb_score": 0.0,
+    "valid_methods": 1,
+    "method_weights": {
+      "pe_pb_percentile": 0.4,
+      "dcf": 0.2,
+      "bank_pb": 0.3,
+      "graham": 0.0
+    },
+    "data_source": "estimated",
+    "regime_discontinuity_warning": false,
+    "graham_verdict": "数据不足",
+    "graham_included": false,
+    "quality_gate_passed": true
+  },
+  "data_source": "akshare+module2"
+}

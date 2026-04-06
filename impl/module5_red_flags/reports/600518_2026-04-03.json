@@ -1,0 +1,78 @@
+{
+  "stock_code": "600518",
+  "stock_name": "康美药业",
+  "report_date": "2026-04-03",
+  "verdict": "存疑",
+  "verdict_reason": "数据不完整:['roe_latest', 'net_profit_cash_ratio', 'revenue_growth_yoy']",
+  "governance": {
+    "pledge_ratio": 0.0,
+    "audit_score": 2,
+    "goodwill_pct": 1.4720445003720213,
+    "signal": "正常(无质押记录或已退市)",
+    "actual_controller": "无法获取",
+    "audit_opinions": {
+      "2018": "保留意见",
+      "2019": "无法表示意见",
+      "2020": "无法表示意见",
+      "2021": "无法表示意见",
+      "2022": "停牌/退市",
+      "2026": "需核实",
+      "2025": "需核实",
+      "2024": "需核实",
+      "2023": "需核实"
+    }
+  },
+  "financial": {
+    "roe_latest": null,
+    "net_profit_cash_ratio": null,
+    "revenue_growth_yoy": null,
+    "net_margin": null,
+    "debt_ratio": null,
+    "inventory_turnover_trend": null,
+    "consecutive_loss_years": 0,
+    "latest_year": ""
+  },
+  "industry_thresholds": {
+    "industry_name": "未知",
+    "roe_p10": 0.05,
+    "net_profit_cash_p10": 0.5,
+    "revenue_growth_p10": null,
+    "flags_triggered": []
+  },
+  "mda": {
+    "strategy_confidence": 0.0,
+    "key_themes": [],
+    "risk_factors": [],
+    "raw_data": {}
+  },
+  "announcements": {
+    "recent_count": 0,
+    "earnings_warnings": [],
+    "corrective_notices": []
+  },
+  "overall_score": 70,
+  "red_flags": [],
+  "yellow_flags": [],
+  "extreme_flags": [
+    {
+      "code": "AUDIT_NON_STANDARD",
+      "label": "审计意见非标（近3年）",
+      "severity": "EXTREME",
+      "source_module": "module9_governance",
+      "detail": "涉及年份: ['2018', '2019', '2020', '2021'], 意见: ['保留意见', '无法表示意见', '无法表示意见', '无法表示意见']",
+      "numeric_value": null,
+      "threshold": null
+    }
+  ],
+  "scoring_details": {
+    "base_score": 100,
+    "deductions": {
+      "audit_non_standard_recent": -30
+    },
+    "total_deduction": -30,
+    "extreme_count": 1,
+    "red_count": 0,
+    "yellow_count": 0
+  },
+  "data_source": "degraded"
+}

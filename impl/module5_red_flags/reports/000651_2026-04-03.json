@@ -1,0 +1,80 @@
+{
+  "stock_code": "000651",
+  "stock_name": "格力电器",
+  "report_date": "2026-04-03",
+  "verdict": "通过",
+  "verdict_reason": "",
+  "governance": {
+    "pledge_ratio": 16.02,
+    "audit_score": 0,
+    "goodwill_pct": 0.9209555768117779,
+    "signal": "正常",
+    "actual_controller": "珠海明骏投资合伙企业(有限合伙)(一般法人/PE)",
+    "audit_opinions": {
+      "2026": "需核实",
+      "2025": "标准无保留意见",
+      "2024": "标准无保留意见",
+      "2023": "标准无保留意见",
+      "2022": "标准无保留意见"
+    }
+  },
+  "financial": {
+    "roe_latest": 0.253212,
+    "net_profit_cash_ratio": null,
+    "revenue_growth_yoy": -0.027783947342091886,
+    "net_margin": null,
+    "debt_ratio": null,
+    "inventory_turnover_trend": null,
+    "consecutive_loss_years": 0,
+    "latest_year": "2024"
+  },
+  "industry_thresholds": {
+    "industry_name": "未知",
+    "roe_p10": 0.05,
+    "net_profit_cash_p10": 0.5,
+    "revenue_growth_p10": null,
+    "flags_triggered": []
+  },
+  "mda": {
+    "strategy_confidence": 0.0,
+    "key_themes": [],
+    "risk_factors": [],
+    "raw_data": {}
+  },
+  "announcements": {
+    "recent_count": 50,
+    "earnings_warnings": [],
+    "corrective_notices": [
+      {
+        "title": "《公司章程》修订对照表",
+        "notice_date": "2025-10-31",
+        "type": ""
+      }
+    ]
+  },
+  "overall_score": 92,
+  "red_flags": [],
+  "yellow_flags": [
+    {
+      "code": "REVENUE_GROWTH_SLOWDOWN",
+      "label": "营业收入增速放缓",
+      "severity": "YELLOW",
+      "source_module": "module2_financial",
+      "detail": "收入同比增长: -2.8%",
+      "numeric_value": -0.027783947342091886,
+      "threshold": null
+    }
+  ],
+  "extreme_flags": [],
+  "scoring_details": {
+    "base_score": 100,
+    "deductions": {
+      "revenue_growth_slowdown": -8
+    },
+    "total_deduction": -8,
+    "extreme_count": 0,
+    "red_count": 0,
+    "yellow_count": 1
+  },
+  "data_source": "partial"
+}

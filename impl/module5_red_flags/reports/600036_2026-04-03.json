@@ -1,0 +1,89 @@
+{
+  "stock_code": "600036",
+  "stock_name": "600036",
+  "report_date": "2026-04-03",
+  "verdict": "存疑",
+  "verdict_reason": "数据不完整:['roe_latest', 'net_profit_cash_ratio', 'revenue_growth_yoy']",
+  "governance": {
+    "pledge_ratio": 0.07,
+    "audit_score": 0,
+    "goodwill_pct": 0.0,
+    "signal": "正常",
+    "actual_controller": "香港中央结算(代理人)有限公司(一般法人/PE)",
+    "audit_opinions": {
+      "2026": "需核实",
+      "2025": "标准无保留意见",
+      "2024": "标准无保留意见",
+      "2023": "标准无保留意见",
+      "2022": "标准无保留意见"
+    },
+    "is_delisted": false
+  },
+  "financial": {
+    "roe_latest": null,
+    "net_profit_cash_ratio": null,
+    "revenue_growth_yoy": null,
+    "net_margin": null,
+    "debt_ratio": null,
+    "inventory_turnover_trend": null,
+    "consecutive_loss_years": 0,
+    "latest_year": ""
+  },
+  "industry_thresholds": {
+    "industry_name": "银行",
+    "roe_p10": 0.05,
+    "net_profit_cash_p10": 0.5,
+    "revenue_growth_p10": null,
+    "flags_triggered": []
+  },
+  "mda": {
+    "strategy_confidence": 0.0,
+    "key_themes": [],
+    "risk_factors": [],
+    "raw_data": {}
+  },
+  "announcements": {
+    "recent_count": 50,
+    "earnings_warnings": [],
+    "corrective_notices": [
+      {
+        "title": "招商银行股份有限公司股东会议事规则（2025年修订）",
+        "notice_date": "2025-12-20",
+        "type": ""
+      },
+      {
+        "title": "招商银行股份有限公司董事会议事规则（2025年修订）",
+        "notice_date": "2025-12-20",
+        "type": ""
+      },
+      {
+        "title": "招商银行股份有限公司章程（2025年修订）",
+        "notice_date": "2025-12-20",
+        "type": ""
+      },
+      {
+        "title": "招商银行股份有限公司关于公司章程修订获核准及不再设置监事会的公告",
+        "notice_date": "2025-12-20",
+        "type": ""
+      },
+      {
+        "title": "招商银行信息披露暂缓与豁免管理办法（2025年修订）",
+        "notice_date": "2025-12-06",
+        "type": ""
+      }
+    ]
+  },
+  "overall_score": 100,
+  "red_flags": [],
+  "yellow_flags": [],
+  "extreme_flags": [],
+  "scoring_details": {
+    "base_score": 100,
+    "deductions": {},
+    "total_deduction": 0,
+    "extreme_count": 0,
+    "red_count": 0,
+    "yellow_count": 0
+  },
+  "data_source": "degraded"
+}

@@ -1,0 +1,108 @@
+{
+  "stock_code": "002014",
+  "stock_name": "永新股份",
+  "report_date": "2026-04-03",
+  "verdict": "通过",
+  "verdict_reason": "",
+  "governance": {
+    "pledge_ratio": 0.0,
+    "audit_score": 0,
+    "goodwill_pct": 0.0,
+    "signal": "正常(无质押记录或已退市)",
+    "actual_controller": "黄山永佳投资有限公司(一般法人/PE)",
+    "audit_opinions": {
+      "2026": "需核实",
+      "2025": "标准无保留意见",
+      "2024": "标准无保留意见",
+      "2023": "标准无保留意见",
+      "2022": "标准无保留意见"
+    }
+  },
+  "financial": {
+    "roe_latest": 0.185367,
+    "net_profit_cash_ratio": null,
+    "revenue_growth_yoy": 0.0422038357500405,
+    "net_margin": null,
+    "debt_ratio": null,
+    "inventory_turnover_trend": null,
+    "consecutive_loss_years": 0,
+    "latest_year": "2024"
+  },
+  "industry_thresholds": {
+    "industry_name": "医药生物",
+    "roe_p10": 0.05,
+    "net_profit_cash_p10": 0.5,
+    "revenue_growth_p10": null,
+    "flags_triggered": []
+  },
+  "mda": {
+    "strategy_confidence": 0.007852941176470589,
+    "key_themes": [],
+    "risk_factors": [],
+    "raw_data": {
+      "strategic_commitments": [],
+      "key_strategic_themes": [],
+      "risk_factors": [],
+      "operating_highlights": []
+    }
+  },
+  "announcements": {
+    "recent_count": 50,
+    "earnings_warnings": [],
+    "corrective_notices": [
+      {
+        "title": "董事会提名、薪酬与考核委员会实施细则（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "董事会审计委员会实施细则（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "募集资金管理制度（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "累积投票制实施细则（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "关于修订《公司章程》、部分公司制度的公告",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "董事会议事规则（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "股东大会议事规则（2025修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      },
+      {
+        "title": "公司章程（2025年修订）",
+        "notice_date": "2025-08-26",
+        "type": ""
+      }
+    ]
+  },
+  "overall_score": 100,
+  "red_flags": [],
+  "yellow_flags": [],
+  "extreme_flags": [],
+  "scoring_details": {
+    "base_score": 100,
+    "deductions": {},
+    "total_deduction": 0,
+    "extreme_count": 0,
+    "red_count": 0,
+    "yellow_count": 0
+  },
+  "data_source": "partial"
+}

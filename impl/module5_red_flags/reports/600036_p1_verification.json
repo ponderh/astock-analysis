@@ -1,0 +1,31 @@
+  0%|          | 0/88 [00:00<?, ?it/s] 45%|████▌     | 40/88 [00:00<00:00, 394.58it/s] 91%|█████████ | 80/88 [00:00<00:00, 382.03it/s]                                                  0%|          | 0/5 [00:00<?, ?it/s] 20%|██        | 1/5 [00:00<00:02,  1.93it/s] 40%|████      | 2/5 [00:00<00:01,  2.74it/s] 60%|██████    | 3/5 [00:01<00:00,  3.29it/s] 80%|████████  | 4/5 [00:01<00:00,  3.46it/s]100%|██████████| 5/5 [00:01<00:00,  3.61it/s]                                               0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:03<00:35,  3.97s/it] 20%|██        | 2/10 [00:06<00:25,  3.20s/it]                                              财务数据计算异常 [600036]: 'statDate'，使用原始数据
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:01<00:13,  1.47s/it] 20%|██        | 2/10 [00:05<00:25,  3.24s/it] 30%|███       | 3/10 [00:07<00:18,  2.68s/it]                                              [CNINFO] 请求失败 page 7: HTTPConnectionPool(host='www.cninfo.com.cn', port=80): Read timed out. (read timeout=20)
+PaddleOCR: 不可用
+Tesseract: 不可用
+未找到 [2024] 年报全文
+[2024] 未找到年报
+[600036] 数据不完整 ['roe_latest', 'net_profit_cash_ratio', 'revenue_growth_yoy']，强制存疑
+[IndustryThresholds] Loaded 10 cached thresholds
+{
+  "stock_code": "600036",
+  "stock_name": "招商银行",
+  "verdict": "存疑",
+  "score": 100,
+  "red_flags": [],
+  "extreme_flags": [],
+  "yellow_flags": [],
+  "data_source": "degraded",
+  "industry": null,
+  "notes": {
+    "cninfo_timeout": true,
+    "paddleocr_available": false,
+    "tesseract_available": false,
+    "annual_report_2024_found": false,
+    "missing_data": [
+      "roe_latest",
+      "net_profit_cash_ratio",
+      "revenue_growth_yoy"
+    ],
+    "financial_calc_error": "'statDate'"
+  }
+}

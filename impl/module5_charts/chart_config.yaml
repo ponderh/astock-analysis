@@ -1,0 +1,555 @@
+# ChartConfig.yaml - 图表配置文件
+# 15张图表完整配置定义
+# 对应 CONTRACT.md 图表清单
+
+# ========== 全局配置 ==========
+global:
+  # 中文字体fallback链（4级）
+  font_fallback:
+    - SimHei
+    - Microsoft YaHei
+    - PingFang SC
+    - Arial
+  
+  # 图表尺寸
+  figure_size:
+    width: 12
+    height: 8
+  
+  # DPI设置
+  dpi: 150
+  
+  # 语言设置
+  locale: zh_CN
+  
+  # 样式主题
+  style: seaborn-v0_8-whitegrid
+
+# ========== 配色方案 ==========
+colors:
+  # A股惯例：红涨绿跌
+  bullish: "#E74C3C"    # 红色 - 上涨/正增长
+  bearish: "#27AE60"    # 绿色 - 下跌/负增长
+  
+  # 主色调
+  primary: "#2C3E50"    # 深蓝灰 - 主标题
+  secondary: "#3498DB"  # 蓝色 - 副数据
+  accent: "#E67E22"     # 橙色 - 强调
+  
+  # 辅助色
+  background: "#FFFFFF"
+  grid: "#BDC3C7"
+  text: "#2C3E50"
+  
+  # 图表系列配色（用于多系列图表）
+  series:
+    - "#3498DB"  # 蓝
+    - "#E74C3C"  # 红
+    - "#2ECC71"  # 绿
+    - "#F39C12"  # 橙
+    - "#9B59B6"  # 紫
+    - "#1ABC9C"  # 青
+    - "#34495E"  # 深灰
+    - "#E67E22"  # 橙
+  
+  # 雷达图/热力图配色
+  heatmap:
+    low: "#27AE60"   # 绿色 - 低值
+    mid: "#F1C40F"   # 黄色 - 中值
+    high: "#E74C3C"  # 红色 - 高值
+
+# ========== 图表配置 ==========
+
+# ---------- 财务模块（6张）----------
+
+# 图表1: 营收/净利润趋势 - 双轴折线图
+chart_01_revenue_profit_trend:
+  name: "营收/净利润趋势"
+  type: dual_axis_line
+  priority: P0
+  data_source: module2
+  metrics:
+    x_axis: years
+    y1_axis:
+      - revenue
+    y2_axis:
+      - net_profit
+  axis_labels:
+    x: "年份"
+    y1: "营业收入（亿元）"
+    y2: "净利润（亿元）"
+  colors:
+    revenue: "#3498DB"
+    net_profit: "#E74C3C"
+  markers:
+    - circle
+    - triangle
+  grid: true
+  legend: true
+  title:
+    cn: "营业收入与净利润趋势"
+    en: "Revenue and Net Profit Trend"
+
+# 图表2: ROIC vs WACC趋势 - 折线图
+chart_02_roic_wacc_trend:
+  name: "ROIC vs WACC趋势"
+  type: line
+  priority: P0
+  data_source: module2
+  metrics:
+    x_axis: years
+    y_axis:
+      - roic
+      - wacc
+  axis_labels:
+    x: "年份"
+    y: "比率（%）"
+  colors:
+    roic: "#3498DB"
+    wacc: "#E67E22"
+  markers:
+    - circle
+    - square
+  grid: true
+  legend: true
+  title:
+    cn: "ROIC 与 WACC 趋势对比"
+    en: "ROIC vs WACC Trend"
+  threshold:
+    line: 0
+    label: "盈亏平衡线"
+
+# 图表3: 杜邦三因子贡献堆叠 - 堆叠面积图
+chart_03_dupont_stacked:
+  name: "杜邦三因子贡献堆叠"
+  type: stacked_area
+  priority: P0
+  data_source: module2
+  metrics:
+    x_axis: years
+    y_axis:
+      - dupont_net_margin      # 净利率
+      - dupont_asset_turnover  # 资产周转率
+      - dupont_equity_multiplier # 权益乘数
+  axis_labels:
+    x: "年份"
+    y: "杜邦分解因子"
+  colors:
+    dupont_net_margin: "#3498DB"
+    dupont_asset_turnover: "#2ECC71"
+    dupont_equity_multiplier: "#E74C3C"
+  stacked: true
+  grid: true
+  legend: true
+  title:
+    cn: "杜邦三因子贡献分解"
+    en: "Dupont Three-Factor Contribution"
+  labels:
+    - "净利率"
+    - "资产周转率"
+    - "权益乘数"
+
+# 图表4: EPS + DPS + 累计分红 - 柱+线组合图
+chart_04_eps_dps_combined:
+  name: "EPS + DPS + 累计分红"
+  type: bar_line_combination
+  priority: P0
+  data_source: module2
+  metrics:
+    x_axis: years
+    bar:
+      - eps
+      - dps
+    line:
+      - cumulative_dps
+  axis_labels:
+    x: "年份"
+    y1: "每股指标（元/股）"
+    y2: "累计分红（元/股）"
+  colors:
+    eps: "#3498DB"
+    dps: "#2ECC71"
+    cumulative_dps: "#E74C3C"
+  grid: true
+  legend: true
+  title:
+    cn: "每股收益、每股分红与累计分红"
+    en: "EPS, DPS and Cumulative Dividend"
+
+# 图表5: 现金流去向堆叠 - 堆叠柱状图
+chart_05_cash_flow_stacked:
+  name: "现金流去向堆叠"
+  type: stacked_bar
+  priority: P1
+  data_source: module2
+  metrics:
+    x_axis: years
+    y_axis:
+      - cfo  # 经营现金流作为基准
+      # 实际需要从模块2获取现金流分项数据
+  axis_labels:
+    x: "年份"
+    y: "现金流（亿元）"
+  colors:
+    operating: "#3498DB"
+    investing: "#E67E22"
+    financing: "#9B59B6"
+  stacked: true
+  grid: true
+  legend: true
+  title:
+    cn: "现金流去向分析"
+    en: "Cash Flow Distribution"
+  note: "需模块2提供现金流细分数据"
+
+# 图表6: 资产负债率+有息负债率 - 双轴折线图
+chart_06_debt_ratios:
+  name: "资产负债率+有息负债率"
+  type: dual_axis_line
+  priority: P0
+  data_source: module2
+  metrics:
+    x_axis: years
+    y1_axis:
+      - debt_ratio
+    y2_axis:
+      - interest_bearing_debt_ratio
+  axis_labels:
+    x: "年份"
+    y1: "资产负债率（%）"
+    y2: "有息负债率（%）"
+  colors:
+    debt_ratio: "#3498DB"
+    interest_bearing_debt_ratio: "#E74C3C"
+  markers:
+    - circle
+    - triangle
+  grid: true
+  legend: true
+  title:
+    cn: "资产负债率与有息负债率趋势"
+    en: "Debt Ratio and Interest-Bearing Debt Ratio"
+
+# ---------- 估值模块（3张）----------
+
+# 图表7: PE/PB/PS历史分位 - 箱线图
+chart_07_valuation_percentile:
+  name: "PE/PB/PS历史分位"
+  type: boxplot
+  priority: P1
+  data_source: module2
+  metrics:
+    x_axis: years
+    y_axis:
+      - pe
+      - pb
+      - ps
+  axis_labels:
+    x: "年份"
+    y: "估值分位"
+  colors:
+    pe: "#3498DB"
+    pb: "#2ECC71"
+    ps: "#E74C3C"
+  grid: true
+  legend: true
+  title:
+    cn: "PE、PB、PS 历史估值分位"
+    en: "PE/PB/PS Historical Percentile"
+  showfliers: true
+
+# 图表8: DCF敏感性热力图 - 热力图
+chart_08_dcf_sensitivity:
+  name: "DCF敏感性热力图"
+  type: heatmap
+  priority: P1
+  data_source: module2
+  metrics:
+    x_axis: growth_rate
+    y_axis: wacc
+    z_axis: dcf_value
+  axis_labels:
+    x: "增长率（%）"
+    y: "WACC（%）"
+    z: "DCF估值（元）"
+  colors:
+    colormap: RdYlGn_r  # 红黄绿反转（高值绿，低值红）
+  grid: false
+  annotation: true
+  title:
+    cn: "DCF 敏感性分析热力图"
+    en: "DCF Sensitivity Heatmap"
+
+# 图表9: 相对估值横向比较 - 柱状图
+chart_09_relative_valuation:
+  name: "相对估值横向比较"
+  type: bar
+  priority: P2
+  data_source: module2
+  metrics:
+    x_axis: peer_companies
+    y_axis:
+      - pe
+      - pb
+  axis_labels:
+    x: "对比公司"
+    y: "估值指标"
+  colors:
+    pe: "#3498DB"
+    pb: "#E74C3C"
+  grid: true
+  legend: true
+  title:
+    cn: "相对估值横向对比"
+    en: "Relative Valuation Comparison"
+  note: "需模块2提供同业数据"
+
+# ---------- 季节性模块（2张）----------
+
+# 图表10: 季度营收/利润波动柱状图
+chart_10_quarterly_revenue:
+  name: "季度营收/利润波动柱状图"
+  type: grouped_bar
+  priority: P1
+  data_source: module2
+  metrics:
+    x_axis: quarter  # Q1, Q2, Q3, Q4
+    y_axis:
+      - quarterly_revenue
+      - quarterly_profit
+  axis_labels:
+    x: "季度"
+    y: "金额（亿元）"
+  colors:
+    revenue: "#3498DB"
+    profit: "#E74C3C"
+  grid: true
+  legend: true
+  title:
+    cn: "季度营收与净利润波动"
+    en: "Quarterly Revenue and Profit"
+  x_ticks:
+    - "Q1"
+    - "Q2"
+    - "Q3"
+    - "Q4"
+
+# 图表11: 季节性热力图（环比+同比）
+chart_11_seasonality_heatmap:
+  name: "季节性热力图"
+  type: heatmap
+  priority: P1
+  data_source: module2
+  metrics:
+    x_axis: quarter
+    y_axis: year
+    z_axis:
+      - revenue_yoy      # 同比
+      - revenue_qoq      # 环比
+  axis_labels:
+    x: "季度"
+    y: "年份"
+    z: "增长率（%）"
+  colors:
+    colormap: RdBu_r
+  grid: false
+  annotation: true
+  title:
+    cn: "季节性波动热力图（同比+环比）"
+    en: "Seasonality Heatmap (YoY + QoQ)"
+  note: "需模块2提供季度同比/环比数据"
+
+# ---------- MD&A模块（3张）----------
+
+# 图表12: 管理层讨论要点词云
+chart_12_mda_wordcloud:
+  name: "管理层讨论要点词云"
+  type: wordcloud
+  priority: P2
+  data_source: module6
+  metrics:
+    text_source:
+      - strategic_commitments.commitment
+      - key_strategic_themes.theme
+      - key_strategic_themes.description
+      - risk_factors.risk
+      - risk_factors.mitigation
+  axis_labels: N/A
+  colors:
+    colormap: viridis
+  background: white
+  max_words: 100
+  title:
+    cn: "管理层讨论要点词云"
+    en: "Management Discussion Word Cloud"
+
+# 图表13: 经营风险趋势 - 时间线
+chart_13_risk_timeline:
+  name: "经营风险趋势"
+  type: timeline
+  priority: P1
+  data_source: module6
+  metrics:
+    x_axis: year
+    y_axis: risk_level
+    annotations:
+      - risk_factors.risk
+      - risk_factors.mitigation
+  axis_labels:
+    x: "年份"
+    y: "风险等级"
+  colors:
+    high: "#E74C3C"
+    medium: "#F39C12"
+    low: "#2ECC71"
+  grid: true
+  legend: true
+  title:
+    cn: "经营风险时间线"
+    en: "Business Risk Timeline"
+  y_ticks:
+    - "低"
+    - "中"
+    - "高"
+
+# 图表14: 行业环境评估雷达
+chart_14_industry_radar:
+  name: "行业环境评估雷达"
+  type: radar
+  priority: P1
+  data_source: module6
+  metrics:
+    categories:
+      - market_growth
+      - competition_intensity
+      - regulatory_risk
+      - technology_risk
+      - supply_chain_risk
+    values: industry_scores
+  axis_labels:
+    categories: "评估维度"
+    r: "得分"
+  colors:
+    fill: "#3498DB"
+    line: "#2C3E50"
+    alpha: 0.3
+  grid: true
+  legend: true
+  title:
+    cn: "行业环境评估雷达图"
+    en: "Industry Environment Radar"
+  note: "需模块6提供行业评分数据"
+
+# ---------- 综合模块（1张）----------
+
+# 图表15: 核心指标仪表盘
+chart_15_dashboard:
+  name: "核心指标仪表盘"
+  type: dashboard
+  priority: P0
+  data_source: module2+module6
+  layout:
+    grid:
+      rows: 2
+      cols: 3
+    items:
+      - position: [0, 0]
+        chart: gauge
+        metric: roe
+        label: "ROE"
+      - position: [0, 1]
+        chart: gauge
+        metric: gross_margin
+        label: "毛利率"
+      - position: [0, 2]
+        chart: gauge
+        metric: pe
+        label: "PE"
+      - position: [1, 0]
+        chart: bar
+        metric: revenue_trend
+        label: "营收趋势"
+      - position: [1, 1]
+        chart: bar
+        metric: profit_trend
+        label: "利润趋势"
+      - position: [1, 2]
+        chart: progress
+        metric: commitment_progress
+        label: "战略承诺进度"
+  axis_labels: N/A
+  colors:
+    gauge:
+      low: "#27AE60"
+      mid: "#F1C40F"
+      high: "#E74C3C"
+  title:
+    cn: "核心财务指标仪表盘"
+    en: "Core Financial Metrics Dashboard"
+
+# ========== 数据源映射 ==========
+data_sources:
+  module2:
+    type: financial_data
+    loader: financial_loader
+    schema: CONTRACT.md_附录A
+    fields:
+      required:
+        - stock_code
+        - years
+        - revenue
+        - net_profit
+        - roe
+        - roic
+        - eps
+        - dps
+        - cfo
+        - total_assets
+        - net_assets
+        - gross_margin
+        - debt_ratio
+      optional:
+        - wacc
+        - interest_bearing_debt_ratio
+        - pe
+        - pb
+        - ps
+        - dupont_net_margin
+        - dupont_asset_turnover
+        - dupont_equity_multiplier
+        - cumulative_dps
+        - quarterly_revenue
+        - quarterly_profit
+
+  module6:
+    type: mda_data
+    loader: mda_loader
+    schema: CONTRACT.md_附录A
+    fields:
+      required:
+        - stock_code
+        - strategic_commitments
+        - key_strategic_themes
+        - risk_factors
+
+# ========== 输出配置 ==========
+output:
+  format: PNG
+  dpi: 150
+  directory: ./output
+  filename_template: "{stock_code}_{chart_id}_{chart_name}.png"
+  compression: none  # PNG为无损
+  
+# ========== 异常处理配置 ==========
+error_handling:
+  missing_data:
+    strategy: show_placeholder
+    placeholder_text: "数据不可用"
+  
+  schema_validation_error:
+    strategy: raise_exception
+    error_message: "数据不符合Schema定义，请检查数据源"
+  
+  font_not_found:
+    strategy: fallback_chain
+    fallback_log: true
